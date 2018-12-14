@@ -28,6 +28,13 @@
 	sw $ra, 0($sp)                        # save return address on stack
 	jal remove_spaces_before
 	jal remove_trailing_spaces
+	jal check_Length
+	lw $ra, 4($sp)                       # restore return address in $ra
+	lw $t9, 0($sp)                       # load return value from the stack
+	addi $sp, $sp, 8                     # restore stack
+	addi $sp, $sp, -4
+	sw $t9, 0($sp)                       # save return value on the stack 
+	jr $ra 
 	
 	remove_first_char:
 	addi $a0, $a0, 1
