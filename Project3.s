@@ -1,5 +1,5 @@
 .data
-	user_input: .space 100
+	user_input: .space 1000
 	too_large: .asciiz "Input is too long."
 	is_empty: .asciiz "Input is empty."
 	is_invalid: .asciiz "Invalid base-34 number."
@@ -7,7 +7,7 @@
   main:
 	li $v0, 8                           #used to get user input as text and displays it
 	la $a0, user_input
-	li $a1, 100
+	li $a1, 1000
 	syscall
 		
 	# Remove leading spaces
@@ -56,10 +56,10 @@
 	sb $zero, 0($t4)                        # Null Terminate string after last non-space character
 	j check_Length
 	        
-  #Check length of string, this obtains the length of the string
+  	#Check length of string, this obtains the length of the string
  	check_Length:
-  li $t1, 0                               #Initialize count at 0
-  add $a0, $t5, $zero
+  	li $t1, 0                               #Initialize count at 0
+  	add $a0, $t5, $zero
         
 	length_loop:
 	lb $t8, 0($a0)                         #load the next char to t8
