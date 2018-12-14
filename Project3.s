@@ -82,13 +82,16 @@
 	add $t4, $t4, $t7                       # Get address of the last non-space character
 	addi $t4, $t4, 1                        # Get address of character after last non-space characnter
 	sb $zero, 0($t4)                        # Null Terminate string after last non-space character
-	j check_Length
+	jr $ra
 	        
   	#Check length of string, this obtains the length of the string
  	check_Length:
   	li $t1, 0                               #Initialize count at 0
   	add $a0, $t5, $zero
-        
+        lb $t8, 0($a0)
+        addi $t8, $t8, -10                      #check if the first byte is end of line char
+        beq $t8, $zero, emptyError              #if it is branch to emptyError
+	
 	length_loop:
 	lb $t8, 0($a0)                         #load the next char to t8
 	or $t7, $t8, $t1   
