@@ -9,6 +9,12 @@
 	la $a0, user_input
 	li $a1, 1000
 	syscall
+	
+	addi $sp, $sp, -8
+	sw $a0, 4($sp)                     # save the user input onto the stack
+	sw $ra, 0($sp)                     # save return address on stack
+	jal process_user_input
+	lw $t9, 0($sp)                     # load return value from the stack 
 		
 	# Remove leading spaces
 	remove_space_before:
