@@ -15,6 +15,12 @@
 	sw $ra, 0($sp)                     # save return address on stack
 	jal process_user_input
 	lw $t9, 0($sp)                     # load return value from the stack 
+	addi $sp, $sp, 4                   # restore stack pointer
+        addi $sp, $sp, -8                  # make room on stack from function parameter and return address 
+	sw $t9, 4($sp)                     # save the number to display on stack
+	sw $ra, 0($sp)                     # save return address on stack
+	jal display_the_Sum
+	j exit
 		
 	# Remove leading spaces
 	remove_space_before:
