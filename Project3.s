@@ -36,6 +36,11 @@
 	sw $t9, 0($sp)                       # save return value on the stack 
 	jr $ra 
 	
+	remove_spaces_before:
+	li $t9, 32                      # save space char to t9
+	lw $a0, 8($sp)                  # load user address position from the stack
+	
+	
 	remove_first_char:
 	addi $a0, $a0, 1
 	j remove_space_before
