@@ -239,6 +239,12 @@
   	addi $sp, $sp, -4
 	sw $t9, 0($sp)      # save the return integer on the stack
 	jr $ra 
+	
+	display_the_Sum:
+        li $v0, 1
+        lw $a0, 4($sp)      # load sum to display from the stack 
+        syscall
+        jr $ra
 
 	#the end of main
 	exit:
