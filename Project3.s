@@ -23,12 +23,11 @@
 	j exit
 		
 	# Remove leading spaces
-	remove_space_before:
-	li $t9, 32                           # save space char to t9
-	lb $t5, 0($a0)                       # load first input char into t5
-	beq $t9, $t5, remove_first_char      # remove the first char if it is a space
-	move $t5, $a0                        # if not a space save new input begining address into t5
-	j remove_trailing_spaces
+	process_user_input:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)                        # save return address on stack
+	jal remove_spaces_before
+	jal remove_trailing_spaces
 	
 	remove_first_char:
 	addi $a0, $a0, 1
