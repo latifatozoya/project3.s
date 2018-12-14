@@ -175,8 +175,8 @@
 	#Converts valid character to a number
 	String_Conversion:     
   	lb $s2, 0($a0)
-  	beqz $s2, display_the_Sum		            #End loop if null character is reached
-	beq $s2, $t8, display_the_Sum    	      #End loop if end-of-line is detected
+  	beqz $s2, return		            #End loop if null character is reached
+	beq $s2, $t8, return    	      #End loop if end-of-line is detected
 	slti $t4, $s2, 58                       #Check if the char is less than 58 (0-9)
   	bne $t4, $zero, zero_to_nine
   	slti $t4, $s2, 89                       #Check if char is less than 89 (A-X)
@@ -235,10 +235,10 @@
 	add $t9, $t9, $s4      #adds the intermediate result
 
   	#displays the result
-  	display_the_Sum: 
-  	li $v0, 1
-  	move $a0, $t9
-  	syscall
+  	return: 
+  	addi $sp, $sp, -4
+	sw $t9, 0($sp)      # save the return integer on the stack
+	jr $ra 
 
 	#the end of main
 	exit:
